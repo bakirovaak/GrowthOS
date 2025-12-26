@@ -1,27 +1,21 @@
+{% load static %}
 <!DOCTYPE html>
-<html class="h-full">
+<html class="h-full bg-gradient-to-br from-purple-600 to-pink-600">
 <head>
     <meta charset="utf-8">
-    <title>Регистрация — GrowthOS</title>
+    <title>Вход — GrowthOS</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="h-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center">
-  <div class="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-md">
-    <h2 class="text-3xl font-bold text-center mb-8 text-purple-800">Создать аккаунт</h2>
-    
-    <form method="post" class="space-y-6">
-      {% csrf_token %}
-      {{ form.as_p }}
-      
-      <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl">
-        Зарегистрироваться
-      </button>
-    </form>
-    
-    <p class="text-center mt-6 text-gray-600">
-      Уже есть аккаунт? 
-      <a href="{% url 'login' %}" class="text-purple-600 font-bold hover:underline">Войти</a>
-    </p>
-  </div>
+<body class="h-full flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-2xl p-10 w-full max-w-md">
+        <h2 class="text-4xl font-bold text-center text-purple-800 mb-8">Вход в GrowthOS</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold py-4 rounded-xl text-xl mt-6">
+                Войти
+            </button>
+        </form>
+    </div>
 </body>
 </html>

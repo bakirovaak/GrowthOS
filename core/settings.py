@@ -127,3 +127,9 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
 CRISPY_TEMPLATE_PACK = "tailwind"
 LOGIN_REDIRECT_URL = '/'      # после логина → на дашборд
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+LOGIN_URL = '/login/'  # теперь редирект будет на твой /login/
+LOGIN_REDIRECT_URL = '/'  # после логина — на главную
+LOGOUT_REDIRECT_URL = '/login/'  # после выхода — на логин
+
+

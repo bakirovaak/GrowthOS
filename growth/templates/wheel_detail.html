@@ -1,0 +1,37 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+    <div class="container mx-auto p-10">
+        <h2 class="text-4xl font-bold text-purple-800 mb-8 text-center">Последнее колесо баланса жизни</h2>
+
+        {% if wheel %}
+            <div class="bg-white rounded-3xl shadow-2xl p-10 max-w-4xl mx-auto">
+                <p class="text-xl text-gray-600 mb-6 text-center">
+                    Дата заполнения: {{ wheel.created_at|date:"d.m.Y в H:i" }}
+                </p>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-6 text-lg">
+                    <li><strong>Здоровье и энергия:</strong> {{ wheel.health }}/10</li>
+                    <li><strong>Эмоции и настроение:</strong> {{ wheel.emotions }}/10</li>
+                    <li><strong>Отношения и любовь:</strong> {{ wheel.relationships }}/10</li>
+                    <li><strong>Семья и друзья:</strong> {{ wheel.family }}/10</li>
+                    <li><strong>Личностный рост:</strong> {{ wheel.personal_growth }}/10</li>
+                    <li><strong>Финансы:</strong> {{ wheel.finances }}/10</li>
+                    <li><strong>Карьера / учёба:</strong> {{ wheel.career_study }}/10</li>
+                    <li><strong>Отдых и хобби:</strong> {{ wheel.rest_hobby }}/10</li>
+                    <li><strong>Окружение и быт:</strong> {{ wheel.environment }}/10</li>
+                    <li><strong>Духовность и смысл:</strong> {{ wheel.spirituality }}/10</li>
+                    <li><strong>Творчество:</strong> {{ wheel.creativity }}/10</li>
+                    <li><strong>Вклад в мир:</strong> {{ wheel.contribution }}/10</li>
+                </ul>
+            </div>
+        {% else %}
+            <p class="text-2xl text-gray-600 text-center mt-20">Вы ещё не заполняли колесо баланса.</p>
+        {% endif %}
+
+        <div class="text-center mt-12">
+            <a href="{% url 'dashboard' %}" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-4 px-10 rounded-xl transition shadow-lg">
+                Вернуться на дашборд
+            </a>
+        </div>
+    </div>
+{% endblock %}

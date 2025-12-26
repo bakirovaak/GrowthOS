@@ -1,27 +1,46 @@
+{% load static %}
 <!DOCTYPE html>
-<html class="h-full">
+<html lang="ru" class="h-full bg-gradient-to-br from-purple-600 to-pink-600">
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Вход — GrowthOS</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="h-full bg-gradient-to-br from-purple-600 to-blue-600 flex items-center justify-center">
-  <div class="bg-white p-10 rounded-2xl shadow-2xl w-full max-w-md">
-    <h2 class="text-3xl font-bold text-center mb-8 text-purple-800">GrowthOS</h2>
-    
-    <form method="post" class="space-y-6">
-      {% csrf_token %}
-      {{ form.as_p }}
-      
-      <button type="submit" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl">
-        Войти
-      </button>
-    </form>
-    
-    <p class="text-center mt-6 text-gray-600">
-      Ещё нет аккаунта? 
-      <a href="{% url 'register' %}" class="text-purple-600 font-bold hover:underline">Зарегистрироваться</a>
-    </p>
-  </div>
+<body class="h-full flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl shadow-2xl p-10 w-full max-w-md">
+        <h2 class="text-4xl font-bold text-center text-purple-800 mb-8">Вход в GrowthOS</h2>
+
+        {% if form.errors %}
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-6">
+                <p>Неверный логин или пароль. Попробуйте снова.</p>
+            </div>
+        {% endif %}
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="mb-6">
+                <label class="block text-gray-700 font-medium mb-2">Имя пользователя</label>
+                {{ form.username }}
+            </div>
+
+            <div class="mb-8">
+                <label class="block text-gray-700 font-medium mb-2">Пароль</label>
+                {{ form.password }}
+            </div>
+
+            <button type="submit" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-bold py-4 rounded-xl text-xl transition shadow-lg">
+                Войти
+            </button>
+        </form>
+
+        <p class="text-center mt-8 text-gray-600">
+            Нет аккаунта? 
+            <a href="{% url 'register' %}" class="text-purple-600 font-bold hover:underline">
+                Зарегистрироваться
+            </a>
+        </p>
+    </div>
 </body>
 </html>

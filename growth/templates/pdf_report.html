@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>GrowthOS — Отчёт</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; color: #333; line-height: 1.6; }
+        h1 { color: #9333ea; text-align: center; }
+        h2 { color: #6b21a8; border-bottom: 2px solid #e9d5ff; padding-bottom: 10px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #f3e8ff; }
+        .footer { text-align: center; margin-top: 60px; color: #999; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <h1>GrowthOS — Отчёт о личностном росте</h1>
+    <p><strong>Пользователь:</strong> {{ user.username }}</p>
+    <p><strong>Дата:</strong> {{ "now"|date:"d.m.Y" }}</p>
+
+    <h2>Текущее колесо баланса жизни</h2>
+    {% if latest_wheel %}
+        <ul>
+            <li>Здоровье и энергия: {{ latest_wheel.health }}/10</li>
+            <li>Эмоции и настроение: {{ latest_wheel.emotions }}/10</li>
+            <li>Отношения и любовь: {{ latest_wheel.relationships }}/10</li>
+            <li>Семья и друзья: {{ latest_wheel.family }}/10</li>
+            <li>Личностный рост: {{ latest_wheel.personal_growth }}/10</li>
+            <li>Финансы: {{ latest_wheel.finances }}/10</li>
+            <li>Карьера / учёба: {{ latest_wheel.career_study }}/10</li>
+            <li>Отдых и хобби: {{ latest_wheel.rest_hobby }}/10</li>
+            <li>Окружение и быт: {{ latest_wheel.environment }}/10</li>
+            <li>Духовность и смысл: {{ latest_wheel.spirituality }}/10</li>
+            <li>Творчество: {{ latest_wheel.creativity }}/10</li>
+            <li>Вклад в мир: {{ latest_wheel.contribution }}/10</li>
+        </ul>
+    {% else %}
+        <p>Колесо баланса ещё не заполнено.</p>
+    {% endif %}
+
+    <h2>Чек-ины за последние 30 дней</h2>
+    <table>
+        <tr>
+            <th>Дата</th>
+            <th>Настроение</th>
+            <th>Энергия</th>
+            <th>Благодарность</th>
+        </tr>
+        {% for checkin in checkins %}
+            <tr>
+                <td>{{ checkin.date|date:"d.m.Y" }}</td>
+                <td>{{ checkin.mood }}/10</td>
+                <td>{{ checkin.energy }}/10</td>
+                <td>{{ checkin.gratitude|default:"—" }}</td>
+            </tr>
+        {% empty %}
+            <tr><td colspan="4">Нет данных за этот период</td></tr>
+        {% endfor %}
+    </table>
+
+    <div class="footer">
+        Сгенерировано в GrowthOS — твоей системе личностного роста
+    </div>
+</body>
+</html>

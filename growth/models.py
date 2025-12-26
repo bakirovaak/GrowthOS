@@ -7,18 +7,18 @@ class WheelOfLife(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     # 12 сфер жизни
-    health = models.IntegerField(default=5)           # здоровье и энергия
-    emotions = models.IntegerField(default=5)         # эмоции
-    relationships = models.IntegerField(default=5)    # отношения
-    family = models.IntegerField(default=5)
-    personal_growth = models.IntegerField(default=5)
-    finances = models.IntegerField(default=5)
-    career_study = models.IntegerField(default=5)
-    rest_hobby = models.IntegerField(default=5)
-    environment = models.IntegerField(default=5)
-    spirituality = models.IntegerField(default=5)
-    creativity = models.IntegerField(default=5)
-    contribution = models.IntegerField(default=5)
+    Здоровье = models.IntegerField(default=5)           
+    Удовлетворенность = models.IntegerField(default=5)        
+    Отношения = models.IntegerField(default=5)    
+    Семья = models.IntegerField(default=5)
+    Личностныйрост = models.IntegerField(default=5)
+    Финанасы = models.IntegerField(default=5)
+    Учеба = models.IntegerField(default=5)
+    Хобби= models.IntegerField(default=5)
+    Друзья = models.IntegerField(default=5)
+    Уровень_счатья = models.IntegerField(default=5)
+    Чтение = models.IntegerField(default=5)
+    Волонтёрство = models.IntegerField(default=5)
 
     class Meta:
         verbose_name = "Колесо баланса жизни"
@@ -26,9 +26,7 @@ class WheelOfLife(models.Model):
 
     def __str__(self):
         return f"Колесо {self.user.username} от {self.created_at.strftime('%d.%m.%Y')}"
-    
-    from django.utils import timezone
-from datetime import date
+
 
 class DailyCheckin(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -43,3 +41,18 @@ class DailyCheckin(models.Model):
 
     def __str__(self):
         return f"{self.user} — {self.date} — настроение {self.mood}"
+
+
+class Habit(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)  # название привычки
+    target_days = models.PositiveIntegerField(default=7)  # сколько раз в неделю
+    sphere = models.CharField(max_length=100, blank=True)  # связь с колесом, например "Здоровье"
+    created_at = models.DateTimeField(auto_now_add=True)
+    order = models.PositiveIntegerField(default=0)  # для сортировки
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return self.name
